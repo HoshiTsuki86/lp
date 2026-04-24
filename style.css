@@ -1,0 +1,727 @@
+/* 星月の館 LP用スタイルシート v2 ─ 参考LPのエッセンスを取り込んだ全体刷新版 */
+:root {
+  --color-base: #0A0A2A;
+  --color-base-alt: #110826;       /* 若干紫みの暗色（セクション交互配色用） */
+  --color-accent: #D4AF37;
+  --color-accent-light: #F0D060;   /* 明るいゴールド */
+  --color-text: #F5F5DC;
+  --color-text-dim: rgba(245,245,220,0.7);
+  --color-section-dark: #07071e;
+  --color-section-mid: #12122e;
+  --color-divider: rgba(212,175,55,0.35);
+}
+
+/* ─── リセットとベース ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Serif JP', serif;
+  background-color: var(--color-base);
+  color: var(--color-text);
+  line-height: 1.9;
+  letter-spacing: 0.05em;
+}
+
+/* ─── 共通セクション ─── */
+.section {
+  padding: 60px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* セクション交互背景（参考LPのメリハリを再現） */
+.section:nth-child(even) {
+  background-color: var(--color-section-mid);
+}
+.section:nth-child(odd) {
+  background-color: var(--color-section-dark);
+}
+
+/* CTAセクションは常に暗めを維持 */
+.section.cta {
+  background: linear-gradient(180deg, #0e0e2a 0%, #070718 100%);
+}
+
+/* ─── セクションタイトル ─── */
+.section-title {
+  font-size: 1.4rem;
+  color: #FFFFFF;
+  margin-bottom: 35px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 12px;
+  /* 参考画像のような強い発光感を出すため、影を多重に重ねます */
+  text-shadow: 
+    0 0 10px rgba(255, 254, 0, 0.8),
+    0 0 20px rgba(255, 254, 0, 0.5),
+    0 0 30px rgba(255, 254, 0, 0.3),
+    0 0 40px rgba(255, 254, 0, 0.2);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--color-accent), transparent);
+  margin: 10px auto 0;
+}
+
+.section-title.gold {
+  color: var(--color-text);
+}
+.section-title.gold::after {
+  background: linear-gradient(to right, transparent, var(--color-text), transparent);
+}
+
+/* ─── ① ファーストビュー ─── */
+.fv {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #07071e;
+}
+
+.fv::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 25, 0.55);
+  z-index: 1;
+}
+
+.fv-bg { display: none; }
+
+.fv-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.fv .logo {
+  font-size: 2.8rem;
+  color: #FFFFFF;
+  margin-bottom: 12px;
+  /* メインロゴはより強く多層的に発光させ、神秘的な輝きを際立たせます */
+  text-shadow: 
+    0 0 15px rgba(255, 254, 0, 0.9),
+    0 0 30px rgba(255, 254, 0, 0.6),
+    0 0 45px rgba(255, 254, 0, 0.4),
+    0 0 60px rgba(255, 254, 0, 0.2),
+    0 0 80px rgba(255, 254, 0, 0.1);
+  letter-spacing: 0.15em;
+}
+
+.fv .catchcopy {
+  font-size: 1.1rem;
+  line-height: 2.2;
+  color: var(--color-text);
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--color-text-dim);
+  animation: bounce 2s infinite;
+  z-index: 10;
+  letter-spacing: 0.2em;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+  40%  { transform: translateY(-8px) translateX(-50%); }
+  60%  { transform: translateY(-4px) translateX(-50%); }
+}
+
+/* ─── ② お悩み ─── */
+.concerns { }
+
+.concern-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.concern-list li {
+  background: rgba(255,255,255,0.04);
+  border-left: 3px solid var(--color-accent);
+  margin-bottom: 14px;
+  padding: 16px 18px;
+  border-radius: 4px;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* ─── ③ 解決策 ─── */
+.solution {
+  background: radial-gradient(circle at center, #1b0c3d 0%, var(--color-base) 100%);
+  position: relative;
+}
+
+.solution .message-box {
+  background: rgba(212,175,55,0.07);
+  border: 1px solid var(--color-accent);
+  padding: 40px 24px;
+  border-radius: 8px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.message-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: var(--color-accent-light);
+  line-height: 2;
+  text-shadow: 0 0 8px rgba(212,175,55,0.6), 0 0 20px rgba(212,175,55,0.3);
+}
+
+.profile-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.profile-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+  box-shadow: 0 0 20px rgba(212,175,55,0.5), 0 0 40px rgba(212,175,55,0.2);
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  background-color: var(--color-base);
+}
+
+.profile-info .name {
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+.profile-info .desc {
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+  margin: 0;
+}
+
+/* ─── ④ ベネフィット ─── */
+.future {
+  background: radial-gradient(ellipse at top, #2a1f0e 0%, var(--color-section-dark) 70%);
+}
+
+.benefit-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.benefit-list li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 22px;
+  font-size: 1rem;
+}
+.benefit-list li::before {
+  content: '✨';
+  position: absolute;
+  left: 0;
+}
+
+/* ─── 🌟 🆕 鑑定メニュー ─── */
+.menu {
+  background: linear-gradient(180deg, var(--color-section-dark) 0%, #1a1535 100%);
+}
+
+.menu-intro {
+  margin-bottom: 40px;
+  color: var(--color-text-dim);
+  font-size: 0.95rem;
+}
+
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.menu-item {
+  background: rgba(255, 255, 240, 0.03);
+  border: 1px solid var(--color-divider);
+  padding: 30px 20px;
+  border-radius: 12px;
+  text-align: left;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 240, 0.05);
+}
+
+.menu-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: var(--color-base-alt);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  padding: 2px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.menu-badge.highlight {
+  background: var(--color-accent);
+  color: var(--color-base);
+}
+
+.menu-name {
+  font-size: 1.25rem;
+  color: var(--color-accent-light);
+  margin: 0 0 12px;
+  text-shadow: 0 0 5px rgba(212,175,55,0.4);
+}
+
+.menu-target {
+  font-size: 0.9rem;
+  color: var(--color-text);
+  margin-bottom: 20px;
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(212,175,55,0.2);
+  padding-bottom: 15px;
+}
+
+.menu-detail {
+  font-size: 0.88rem;
+  color: var(--color-text-dim);
+}
+
+.menu-point {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+}
+
+.menu-point li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 8px;
+}
+
+.menu-point li::before {
+  content: '🌒';
+  position: absolute;
+  left: 0;
+  font-size: 0.8rem;
+}
+
+/* ─── 🌟 CTAボタン共通 ─── */
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 18px 24px;
+  border-radius: 50px;
+  color: var(--color-base);
+  font-weight: bold;
+  font-size: 1.05rem;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+/* キラキラエフェクト */
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -120%;
+  width: 50%; height: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg);
+  animation: shine 3.5s infinite;
+}
+
+@keyframes shine {
+  0%   { left: -120%; }
+  25%  { left: 200%; }
+  100% { left: 200%; }
+}
+
+.btn-icon { margin-right: 10px; font-size: 1.2rem; }
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* LINEボタン — 一番目立つよう明るいゴールド＋アイボリー枠 */
+.btn-line {
+  background: linear-gradient(135deg, #F5E07A 0%, #C8960C 100%);
+  color: var(--color-base);
+  border: 2px solid rgba(255,255,255,0.6);
+  font-size: 1.12rem;
+  padding: 20px 24px;
+}
+
+.btn-stores {
+  background: linear-gradient(135deg, #E6C27A 0%, #B8860B 100%);
+  color: var(--color-base);
+}
+
+.btn-coconala {
+  background: linear-gradient(135deg, #E6C27A 0%, #B8860B 100%);
+  color: var(--color-base);
+  width: 100%;
+}
+
+.btn-wrapper-coconala {
+  display: block;
+  width: 100%;
+}
+
+.btn-wrapper-coconala .btn-coconala {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.coconala-note {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--color-text-dim);
+}
+
+/* ─── ⑥ 選ばれる理由 ─── */
+.reason-list {
+  list-style: none;
+  padding: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.reason-card {
+  border: 1px solid rgba(212,175,55,0.4);
+  padding: 22px 18px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  background: rgba(212,175,55,0.05);
+  text-align: left;
+}
+
+.reason-head {
+  color: var(--color-accent);
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  text-shadow: 0 0 8px rgba(212,175,55,0.6);
+}
+
+/* ─── ⑦ お客様の声 ─── */
+.voice-card {
+  background: rgba(255,255,255,0.06);
+  padding: 20px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+  text-align: left;
+  border-left: 3px solid var(--color-accent);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.voice-text {
+  font-style: italic;
+  margin-bottom: 8px;
+  line-height: 1.9;
+}
+
+.voice-attr {
+  font-size: 0.82rem;
+  color: var(--color-text-dim);
+  text-align: right;
+  margin: 0;
+}
+
+/* ─── ⑨ 鑑定の流れ ─── */
+.step-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.step-list li {
+  margin-bottom: 24px;
+  background: rgba(255,255,255,0.04);
+  padding: 20px;
+  border-radius: 6px;
+  border-left: 3px solid var(--color-accent);
+}
+
+.step-num {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 6px rgba(212,175,55,0.6);
+}
+
+.step-content h3 { margin: 0 0 6px; font-size: 1rem; }
+.step-content p  { margin: 0; font-size: 0.9rem; color: var(--color-text-dim); }
+
+/* ─── ⑪ FAQ ─── */
+.faq-list {
+  text-align: left;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.faq-list dt {
+  font-weight: bold;
+  color: var(--color-accent);
+  margin-top: 24px;
+  padding-left: 28px;
+  position: relative;
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px rgba(212,175,55,0.5);
+}
+
+.faq-list dt::before {
+  content: "Q.";
+  position: absolute;
+  left: 0; top: 0;
+  color: var(--color-text);
+}
+
+.faq-list dd {
+  margin: 8px 0 0 0;
+  padding-left: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px dotted rgba(255,255,255,0.15);
+  position: relative;
+  font-size: 0.9rem;
+  color: var(--color-text-dim);
+}
+
+.faq-list dd::before {
+  content: "A.";
+  position: absolute;
+  left: 0; top: 8px;
+  color: var(--color-accent);
+}
+
+/* ─── ⑫ クロージング ─── */
+.closing {
+  background: radial-gradient(ellipse at center, #1e1028 0%, var(--color-section-dark) 70%);
+}
+
+.closing-msg {
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 2.2;
+  color: var(--color-accent-light);
+  text-shadow: 0 0 10px rgba(212,175,55,0.7), 0 0 25px rgba(212,175,55,0.4);
+}
+
+/* ─── 🔮 神秘的演出（アニメーション・装飾） ─── */
+
+/* 1. 星屑の粒子（Stardust） */
+.stardust-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 50%;
+  opacity: 0;
+  animation: stardust-move linear infinite;
+}
+@keyframes stardust-move {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  20% { opacity: 0.6; }
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* 2. アール・ヌーヴォー風飾り枠（Art Nouveau Frames） */
+.decorative-frame {
+  position: relative;
+  padding: 80px 40px;
+  border: 1px solid rgba(212,175,55,0.3);
+  margin: 40px 0;
+}
+.decorative-frame::before,
+.decorative-frame::after,
+.decorative-frame .corner-tl,
+.decorative-frame .corner-tr {
+  content: '';
+  position: absolute;
+  width: 150px; height: 150px;
+  background-image: url('art_nouveau_frame_gold_transparent.png');
+  background-size: contain; /* 左上の素材をそのまま使う */
+  background-repeat: no-repeat;
+  z-index: 10;
+}
+/* 左上の素材を反転・回転させて四隅に配置 */
+.decorative-frame .corner-tl { top: -20px; left: -20px; transform: scale(1); }
+.decorative-frame .corner-tr { top: -20px; right: -20px; transform: scaleX(-1); }
+.decorative-frame::after { bottom: -20px; right: -20px; transform: scale(-1); }
+.decorative-frame::before { bottom: -20px; left: -20px; transform: scaleY(-1); }
+
+/* プロフィールボックス（message-box） */
+.message-box {
+  position: relative;
+  padding: 80px 40px;
+  border: 1px solid rgba(212,175,55,0.2);
+  background: #0a0a2a; 
+}
+.message-box::before,
+.message-box::after,
+.message-box .corner-tl,
+.message-box .corner-tr {
+  content: '';
+  position: absolute;
+  width: 120px; height: 120px;
+  background-image: url('art_nouveau_frame_gold_transparent.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 5;
+}
+.message-box .corner-tl { top: -10px; left: -10px; transform: scale(1); }
+.message-box .corner-tr { top: -10px; right: -10px; transform: scaleX(-1); }
+.message-box::after { bottom: -10px; right: -10px; transform: scale(-1); }
+.message-box::before { bottom: -10px; left: -10px; transform: scaleY(-1); }
+
+/* 3. 浮遊アニメーション（Floating Effect） */
+.floating {
+  animation: floating-soul 6s ease-in-out infinite;
+}
+@keyframes floating-soul {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* スクロール時のフェードイン（簡易実装） */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── フッター ─── */
+.footer {
+  text-align: center;
+  padding: 24px 20px;
+  font-size: 0.78rem;
+  color: rgba(245,245,220,0.4);
+  background-color: #030310;
+  border-top: 1px solid var(--color-divider);
+}
+/* ─── 📱 ボトムナビゲーション ─── */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(10, 10, 42, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 2px double var(--color-divider);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 24px 24px 0 0;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-text-dim);
+  transition: color 0.3s, transform 0.3s;
+  flex: 1;
+}
+
+.nav-item .material-symbols-outlined {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.nav-item .nav-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.nav-item:hover, .nav-item.active {
+  color: var(--color-accent-light);
+  transform: translateY(-2px);
+}
+
+.nav-item.active .material-symbols-outlined {
+  text-shadow: 0 0 10px var(--color-accent);
+}
+
+/* ─── ✨ 装飾の磨き上げ ─── */
+.text-glow {
+  text-shadow: 
+    0 0 10px rgba(255, 254, 0, 0.8),
+    0 0 25px rgba(255, 254, 0, 0.4);
+}
+
+/* ボトムナビがあるためフッターの下に余白を追加 */
+.footer {
+  margin-bottom: 80px;
+}
+
+/* ボタン内のアイコン調整 */
+.btn-icon {
+  margin-right: 8px;
+  font-size: 20px;
+  vertical-align: middle;
+}
